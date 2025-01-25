@@ -74,9 +74,26 @@ public class BubbleController : MonoBehaviour
         player2lastpos = Player2.transform.position;
     }
 
-    public void SpawnBubble(bool isPlayer1, Vector3 position)
+    public void SpawnBubble(bool isPlayer1, Vector3 position, Material material)
     {
         if(isPlayer1)
+        {
+            GameObject current = Instantiate(GreenBubblePrefab, position, Quaternion.identity);
+            GreenBubbles.Add(current);
+            current.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(Player1.transform.position - player1lastpos) * spawnforce, ForceMode.Impulse);
+            current.GetComponent<MeshRenderer>().material = material;
+        }
+        else
+        {
+            GameObject current = Instantiate(RedBubblePrefab, position, Quaternion.identity);
+            RedBubbles.Add(current);
+            current.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(Player2.transform.position - player2lastpos)*spawnforce, ForceMode.Impulse);
+            current.GetComponent<MeshRenderer>().material = material;
+        }
+    }
+    public void SpawnBubble(bool isPlayer1, Vector3 position)
+    {
+        if (isPlayer1)
         {
             GameObject current = Instantiate(GreenBubblePrefab, position, Quaternion.identity);
             GreenBubbles.Add(current);
@@ -86,7 +103,7 @@ public class BubbleController : MonoBehaviour
         {
             GameObject current = Instantiate(RedBubblePrefab, position, Quaternion.identity);
             RedBubbles.Add(current);
-            current.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(Player2.transform.position - player2lastpos)*spawnforce, ForceMode.Impulse);
+            current.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(Player2.transform.position - player2lastpos) * spawnforce, ForceMode.Impulse);
         }
     }
 

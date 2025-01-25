@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4143954737054523529
+--- !u!1001 &5797648552756854133
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -66,11 +66,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 871951da0bcc68147abd0c8a95e0e89e, type: 2}
+      objectReference: {fileID: 2100000, guid: 134369d86f75e3042ac48ed694d7adc7, type: 2}
     - target: {fileID: 8246113262409903983, guid: 0e27d0d708cade043b7acb68b2c736f4,
         type: 3}
       propertyPath: m_Name
-      value: RedBubble
+      value: BlueBubble
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e27d0d708cade043b7acb68b2c736f4, type: 3}

@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
     public float Health;
-
+    public int playerIndex;
     Rigidbody rb;
 
     List<GameObject> touchingballs = new List<GameObject>();
+
 
     void Start()
     {
@@ -17,6 +19,8 @@ public class Bubble : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        //play animation
+
         Health -= damage;
         if(Health <= 0)
         {
@@ -30,35 +34,34 @@ public class Bubble : MonoBehaviour
 
         foreach(GameObject go in touchingballs)
         {
-            if (Vector3.Distance(gameObject.transform.position, go.transform.position) < 2.2f)
+            if (Vector3.Distance(gameObject.transform.position, go.transform.position) < transform.localScale.x + go.transform.localScale.x)
             {
                 rb.AddForce(Vector3.Normalize(go.transform.position - transform.position) * 0.3f, ForceMode.Acceleration);
             }
             else
             {
-                touchingballs.Remove(go);
+                objstoremove.Add(go);
             }   
         }
+        touchingballs = touchingballs.Except(objstoremove).ToList();
     }
 
     void PopBubble()
     {
-        //Add animation and sound effects here!
-        BubbleController.sInstance.RemoveBubbleFromList(gameObject);
+        GameManager.sInstance.Playerdatas[playerIndex].Bubbles.Remove(gameObject);
+        //Play animation
         Destroy(gameObject);
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if(BubbleController.sInstance.GreenBubbles.Contains(gameObject) && BubbleController.sInstance.GreenBubbles.Contains(collision.gameObject))
-        {
-            touchingballs.Add(collision.gameObject);
-        }else if (BubbleController.sInstance.RedBubbles.Contains(gameObject) && BubbleController.sInstance.RedBubbles.Contains(collision.gameObject))
+        Bubble collidingBubble;
+        if (!collision.gameObject.TryGetComponent(out collidingBubble))
+            return;
+        if(playerIndex == collidingBubble.playerIndex)
         {
             touchingballs.Add(collision.gameObject);
         }
     }
-
 }

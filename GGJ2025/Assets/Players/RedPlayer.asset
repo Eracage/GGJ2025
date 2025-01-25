@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17e7698f0b82f84cbdb3b38d87cb569, type: 3}
+  m_Name: RedPlayer
+  m_EditorClassIdentifier: 
+  index: 1
+  Score: 0
+  Damage: 0.5
+  Speed: 3.5
+  BubbleEjectionForce: 3
+  BubbleGrowRate: 1.5
+  PlayerPrefab: {fileID: 6053139656693375866, guid: 94fec285ca905054a9c358b295b7003c,
+    type: 3}
+  BubblePrefab: {fileID: 8246113262409903983, guid: 4ddee961e453e3c4eb68574d92f767fe,
+    type: 3}
+  Bubbles: []

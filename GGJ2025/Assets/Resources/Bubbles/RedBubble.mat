@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreenBubble 1
+  m_Name: RedBubble
   m_Shader: {fileID: -6465566751694194690, guid: fda853e095cf0a944b9596a84306e18b,
     type: 3}
   m_ValidKeywords: []
@@ -38,8 +38,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color1: {r: 0.5131404, g: 0.8773585, b: 0.36832502, a: 0}
-    - _Color2: {r: 0.35377356, g: 0.6849773, b: 1, a: 0}
+    - _Color1: {r: 1, g: 0.2216981, b: 0.38800177, a: 0}
+    - _Color2: {r: 1, g: 0, b: 0.15838766, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5210800253365775984
 MonoBehaviour:
