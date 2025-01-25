@@ -34,18 +34,20 @@ public class Bubble : MonoBehaviour
     {
         List<GameObject> objstoremove = new List<GameObject>();
 
-        foreach(GameObject go in touchingballs)
+        for (int i = touchingballs.Count - 1; i >= 0; --i)
         {
-            if (Vector3.Distance(gameObject.transform.position, go.transform.position) < transform.localScale.x + go.transform.localScale.x)
+            if (!touchingballs[i])
             {
-                rb.AddForce(Vector3.Normalize(go.transform.position - transform.position) * 0.3f, ForceMode.Acceleration);
+                touchingballs.RemoveAt(i);
+                continue;
             }
-            else
+            if (Vector3.Distance(gameObject.transform.position, touchingballs[i].transform.position) > transform.localScale.x + touchingballs[i].transform.localScale.x)
             {
-                objstoremove.Add(go);
-            }   
+                touchingballs.RemoveAt(i);
+                continue;
+            }
+            rb.AddForce(Vector3.Normalize(touchingballs[i].transform.position - transform.position) * 0.3f, ForceMode.Acceleration);
         }
-        touchingballs = touchingballs.Except(objstoremove).ToList();
     }
 
     void PopBubble()
