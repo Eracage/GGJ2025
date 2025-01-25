@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class GameManager : MonoBehaviour
     public List<PlayerData> Playerdatas = new List<PlayerData>();
 
     List<PlayerController> PlayerControllers = new List<PlayerController>();
+
+    public float MatchTime = 60;
+    bool isGameActive = false;
+
+    TextMeshProUGUI GameTimerText;
 
     void SpawnNewPlayer(PlayerData data)
     {
@@ -78,6 +84,10 @@ public class GameManager : MonoBehaviour
                 NumberOfConnectedPlayers++;
             }
         }
+
+        GameTimerText = GameObject.FindWithTag("TimerText").GetComponent<TextMeshProUGUI>();
+        
+        isGameActive = true;
     }
 
     public void RespawnPlayer(int index)
@@ -104,11 +114,36 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        StartMap();
+        if(isGameActive)
+        {
+            UpdateTimer();
+        }
+        else
+        {
+            StartMap();
+        }
     }
+
+    void UpdateTimer()
+    {
+        MatchTime -= Time.deltaTime;
+        if(MatchTime>10.0f)
+        {
+            int time = (int)MatchTime;
+            GameTimerText.text = time.ToString();
+        }
+        else
+        {
+            GameTimerText.color = Color.red;
+            GameTimerText.text = MatchTime.ToString("#.#");
+        }
+
+    }
+
+
+
 
     public List<Bubble> GetAllBubbles()
     {

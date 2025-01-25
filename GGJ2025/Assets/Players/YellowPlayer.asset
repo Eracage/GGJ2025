@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   Score: 0
-  AttackRange: 0.5
-  Damage: 5
+  AttackRange: 0.8
+  Damage: 6
   Speed: 6
   BubbleEjectionForce: 3
   BubbleGrowRate: 1.5
