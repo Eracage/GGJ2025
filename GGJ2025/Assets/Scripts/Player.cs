@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
 
     Vector3 lastframeposition;
 
+    Vector2 PlayerMovement = Vector2.zero;
+    public Vector2 PlayerMovementInput = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,34 +36,20 @@ public class Player : MonoBehaviour
 
     void DebugControls()
     {
-
-        float hor = Input.GetAxis("Horizontal") * data.Speed * Time.deltaTime;
-        float ver = Input.GetAxis("Vertical") * data.Speed * Time.deltaTime;
-        transform.Translate(new Vector3(hor, ver, 0));
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isHoldingBubble = true;
-            bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
-        }
-        if (Input.GetKeyUp(KeyCode.Space) && isHoldingBubble)
-        {
-            ReleaseBubble();
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            //attack
-        }
     }
 
-    void ReleaseBubble()
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        bubble.transform.parent = null;
-        bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.position - lastframeposition) * data.BubbleEjectionForce, ForceMode.Impulse);
-        bubble.AddComponent<Bubble>().playerIndex = data.index;
-        bubble = null;
-        isHoldingBubble = false;
+        PlayerMovement = Vector2.Lerp(PlayerMovement, PlayerMovementInput, 0.1f);
+        Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * data.Speed * Time.fixedDeltaTime;
+        transform.Translate(movement);
+    }
+
+    public void StartGrowingBubble()
+    {
+        isHoldingBubble = true;
+        bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
     }
 
     void GrowBubble()
@@ -71,5 +60,24 @@ public class Player : MonoBehaviour
         {
             ReleaseBubble();
         }
+    }
+
+    public void ReleaseBubble()
+    {
+        if (!isHoldingBubble)
+        {
+            return;
+        }
+        bubble.transform.parent = null;
+        bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.position - lastframeposition) * data.BubbleEjectionForce, ForceMode.Impulse);
+        bubble.AddComponent<Bubble>().playerIndex = data.index;
+        bubble = null;
+        isHoldingBubble = false;
+    }
+
+    public void Attack()
+    {
+        // if cooldown etc
+        // attack
     }
 }

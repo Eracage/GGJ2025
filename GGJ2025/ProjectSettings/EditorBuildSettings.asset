@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PlayerSelection.unity
+    guid: 69ebc582d2bd02d4a923d2352ef24313
+  - enabled: 1
     path: Assets/Scenes/BetterNotBreakMyBubbleOr.unity
     guid: f764adf0c673e5449afeb677df093601
   m_configObjects: {}

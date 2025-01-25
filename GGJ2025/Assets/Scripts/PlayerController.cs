@@ -5,50 +5,48 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public int PlayerID = 0;
-    public float PlayerSpeed;
-    public float PlayerDamage;
-    public float PlayerAttackRange = 1.3f;
-    public float PlayerSpawnForce = 3.0f;
-    private Vector3 PlayerLastPosition = Vector3.zero;
-    private Vector2 PlayerMovement = Vector2.zero;
-    private Vector2 PlayerMovementInput = Vector2.zero;
-    public bool PlayerAttackActive = false;
-    public bool PlayerCreateActive = false;
+    public Player controlledPlayer1;
+    public bool Player1Active = false;
+
+    public Player controlledPlayer2;
+    public bool Player2Active = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerID = 2;
-        PlayerLastPosition = transform.position;
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().OnPlayerJoined(this);
     }
 
     public void OnMovement(InputAction.CallbackContext context)
     {
-        PlayerMovementInput = context.ReadValue<Vector2>();
+        if (!controlledPlayer1)
+        {
+            return;
+        }
+        controlledPlayer1.PlayerMovementInput = context.ReadValue<Vector2>();
     }
 
     public void OnAction(InputAction.CallbackContext context)
     {
+        if (!controlledPlayer1)
+        {
+            return;
+        }
         if (context.performed)
         {
             float action = context.ReadValue<float>();
-            Debug.Log(action);
             if (action < 0)
             {
-                PlayerAttackActive = true;
-                PlayerCreateActive = false;
+                controlledPlayer1.Attack();
             }
             else if (action > 0)
             {
-                PlayerAttackActive = false;
-                PlayerCreateActive = true;
+                controlledPlayer1.StartGrowingBubble();
             }
         }
         else if (context.canceled)
         {
-            PlayerAttackActive = false;
-            PlayerCreateActive = false;
+            controlledPlayer1.ReleaseBubble();
         }
     }
 
@@ -60,13 +58,5 @@ public class PlayerController : MonoBehaviour
     public void Create()
     {
 
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        PlayerMovement = Vector2.Lerp(PlayerMovement, PlayerMovementInput, 0.1f);
-        Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * PlayerSpeed * Time.fixedDeltaTime;
-        transform.Translate(movement);
     }
 }
