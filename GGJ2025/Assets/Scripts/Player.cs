@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
 
     Vector3 lastframeposition;
 
+    Vector2 PlayerMovement = Vector2.zero;
+    public Vector2 PlayerMovementInput = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,52 +45,41 @@ public class Player : MonoBehaviour
 
     void DebugControls()
     {
+    }
 
-        float hor = Input.GetAxis("Horizontal") * data.Speed * Time.deltaTime;
-        float ver = Input.GetAxis("Vertical") * data.Speed * Time.deltaTime;
-        transform.Translate(new Vector3(hor, ver, 0));
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        PlayerMovement = Vector2.Lerp(PlayerMovement, PlayerMovementInput, 0.1f);
+        Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * data.Speed * Time.fixedDeltaTime;
+        transform.Translate(movement);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isHoldingBubble = true;
-            bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
+    public void StartGrowingBubble()
+    {
+        isHoldingBubble = true;
+        bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
+    }
 
-            audioSource.pitch = Random.Range(1.2f,1.6f);
-            audioSource.loop = true;
-            audioSource.PlayOneShot(data.BubbleFillSound);
-        }
-        if (Input.GetKeyUp(KeyCode.Space) && isHoldingBubble)
+
+    void GrowBubble()
+    {
+        audioSource.pitch += Time.deltaTime;
+        bubble.transform.localScale += bubble.transform.localScale * data.BubbleGrowRate * Time.deltaTime;
+        bubble.transform.position =  transform.position + new Vector3(bubble.transform.localScale.x, 0, 0);
+        if (bubble.transform.localScale.x > 3)
         {
             ReleaseBubble();
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isHoldingBubble)
-        {
-            Attack();
-        }
+                
     }
 
-    void Attack()
+    public void ReleaseBubble()
     {
-        audioSource.PlayOneShot(data.PlayerAttackSounds[Random.Range(0, 3)]);
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.right, out hit, data.AttackRange))
+        if (!isHoldingBubble)
         {
-            Bubble BubbleComponent; 
-
-            if(hit.transform.gameObject.TryGetComponent(out BubbleComponent))
-            {
-                if(BubbleComponent.playerIndex != data.index)
-                {
-                    BubbleComponent.TakeDamage(data.Damage);
-                }
-            }
+            return;
         }
-    }
-
-    void ReleaseBubble()
-    {
         audioSource.Stop();
         data.Bubbles.Add(bubble);
         bubble.transform.parent = null;
@@ -100,15 +92,9 @@ public class Player : MonoBehaviour
         audioSource.PlayOneShot(data.BubblePopClips[Random.Range(0, 3)]);
     }
 
-    void GrowBubble()
+    public void Attack()
     {
-        audioSource.pitch += Time.deltaTime;
-
-        bubble.transform.localScale += bubble.transform.localScale * data.BubbleGrowRate * Time.deltaTime;
-        bubble.transform.position =  transform.position + new Vector3(bubble.transform.localScale.x, 0, 0);
-        if (bubble.transform.localScale.x > 3)
-        {
-            ReleaseBubble();
-        }
+        // if cooldown etc
+        // attack
     }
 }
