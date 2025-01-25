@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TimerText
+  - GameOverText
+  - PlayerTitleGrid
   layers:
   - Default
   - TransparentFX

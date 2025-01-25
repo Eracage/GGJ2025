@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   Score: 0
+  Name: 
   AttackRange: 0.8
   Damage: 6
   Speed: 6
@@ -37,6 +38,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b457f7da34407fb458fafe1d28137c2b, type: 3}
   - {fileID: 8300000, guid: fca76c079a2d3ab41ac59256f0374ce4, type: 3}
   - {fileID: 8300000, guid: b7667548d61a16f4696246a84d6b557a, type: 3}
+  GameoverSceneName: {fileID: 5977885672635577696, guid: bfebef4e5fd5ffa4ca225732b74b7112,
+    type: 3}
   PlayerPrefab: {fileID: 6053139656693375866, guid: 94fec285ca905054a9c358b295b7003c,
     type: 3}
   BubblePrefab: {fileID: 5472538417671360486, guid: 4ddee961e453e3c4eb68574d92f767fe,
