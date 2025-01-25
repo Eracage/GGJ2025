@@ -1,0 +1,160 @@
+{
+    "name": "Anykey",
+    "maps": [
+        {
+            "name": "Anykey",
+            "id": "117d3dae-4d47-4c32-a9eb-e1dbd0325462",
+            "actions": [
+                {
+                    "name": "Anykey",
+                    "type": "Button",
+                    "id": "f8deb937-a9a9-47fc-bc62-37bf3778545b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "09f6de76-191a-4a8c-b6c7-b5acc148e50f",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "AnyControl",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c898ab0-7d40-4769-8925-8bf8e019dd3f",
+                    "path": "*/{Back}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75542704-dfb0-48e1-9daa-d1a2faa9e526",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab1752ae-edd0-43bb-a81e-74e1a5e20e08",
+                    "path": "*/{Forward}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ae62e37-6803-412f-b396-c8211dd2bd69",
+                    "path": "*/{Menu}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76f29a01-4752-4ad1-b844-c679cb74102a",
+                    "path": "*/{PrimaryAction}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41dad515-a977-46ec-b9e9-4eb7c7813d42",
+                    "path": "*/{PrimaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8d1edd6-54c8-4421-b03c-7fbfa96056f4",
+                    "path": "*/{SecondaryAction}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a608ee08-b107-4c57-ad34-d48659eda9f4",
+                    "path": "*/{SecondaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ebcfb1b-e262-4e3f-be36-0452e79bd546",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "AnyControl",
+            "bindingGroup": "AnyControl",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Joystick>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
