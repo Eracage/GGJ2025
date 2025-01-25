@@ -48,9 +48,15 @@ MonoBehaviour:
   PlayerSpawnpoints:
   - {x: -8, y: 0, z: 0}
   - {x: 8, y: 0, z: 0}
+  - {x: 0, y: 5, z: 0}
+  - {x: 0, y: -5, z: 0}
+  - {x: 0, y: 0, z: 0}
   Playerdatas:
   - {fileID: 11400000, guid: 2b6686b682fdcde43944eb7f9b6bea6a, type: 2}
   - {fileID: 11400000, guid: dbfc73db8d571ff4eba9e0d8e08af093, type: 2}
+  - {fileID: 11400000, guid: 20e4ada7375100c48b8cbfe6c9fd4330, type: 2}
+  - {fileID: 11400000, guid: 76b3400090c429b4bbd35ec2ce2ca89d, type: 2}
+  - {fileID: 11400000, guid: 734708eb15c78af4dbba57308d17cc5f, type: 2}
 --- !u!114 &37392220
 MonoBehaviour:
   m_ObjectHideFlags: 0

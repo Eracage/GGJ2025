@@ -52,7 +52,7 @@ public class Bubble : MonoBehaviour
 
     void PopBubble()
     {
-        GameManager.sInstance.Playerdatas[playerIndex].Bubbles.Remove(gameObject);
+        GameManager.sInstance.Players[playerIndex].Bubbles.Remove(this);
         //Play animation
         Destroy(gameObject);
     }

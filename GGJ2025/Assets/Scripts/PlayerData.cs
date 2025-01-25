@@ -8,8 +8,6 @@ public class PlayerData : ScriptableObject
     public int index;
     [HideInInspector]
     public int Score = 0;
-    [HideInInspector]
-    public List<GameObject> Bubbles = new List<GameObject>();
     [Space]
     [Header("Stats")]
     public float AttackRange = 2.5f;

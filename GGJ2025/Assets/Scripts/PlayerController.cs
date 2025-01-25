@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
             float action = context.ReadValue<float>();
             if (action < 0)
             {
-                controlledPlayer1.Attack();
+                controlledPlayer1.StartAttack();
             }
             else if (action > 0)
             {
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             controlledPlayer1.ReleaseBubble();
+            controlledPlayer1.StopAttacking();
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,7 +8,8 @@ public class Player : MonoBehaviour
     AudioSource audioSource;
     public PlayerData data;
     public Transform BubbleSpawnPosition;
-
+    public List<Bubble> Bubbles = new List<Bubble>();
+    bool isAttacking = false;
     bool isHoldingBubble = false;
     GameObject bubble;
 
@@ -27,15 +29,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (isHoldingBubble)
-        {
             GrowBubble();
-        }
-        else 
-        {
-            audioSource.loop = false;
-            audioSource.pitch = 1.0f;
-        }
-        DebugControls();
     }
 
     private void LateUpdate()
@@ -43,16 +37,14 @@ public class Player : MonoBehaviour
         lastframeposition = transform.position;
     }
 
-    void DebugControls()
-    {
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         PlayerMovement = Vector2.Lerp(PlayerMovement, PlayerMovementInput, 0.1f);
         Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * data.Speed * Time.fixedDeltaTime;
         transform.Translate(movement);
+
+        if (isAttacking)
+            AttackTick();
     }
 
     public void StartGrowingBubble()
@@ -80,21 +72,53 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        audioSource.loop = false;
+        audioSource.pitch = 1.0f;
         audioSource.Stop();
-        data.Bubbles.Add(bubble);
         bubble.transform.parent = null;
         bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.position - lastframeposition) * data.BubbleEjectionForce, ForceMode.Impulse);
         Bubble BubbleComponent = bubble.AddComponent<Bubble>();
+        Bubbles.Add(BubbleComponent);
         BubbleComponent.playerIndex = data.index;
         BubbleComponent.BubblepopClips = data.BubblePopClips;
         bubble = null;
         isHoldingBubble = false;
-        audioSource.PlayOneShot(data.BubblePopClips[Random.Range(0, 3)]);
+        audioSource.PlayOneShot(data.BubblePopClips[Random.Range(0, data.BubblePopClips.Length)]);
     }
 
-    public void Attack()
+    public void StartAttack()
     {
-        // if cooldown etc
-        // attack
+        if (isHoldingBubble || isAttacking)
+            return;
+
+        isAttacking = true;
+        audioSource.loop = true;
+        audioSource.PlayOneShot(data.PlayerAttackSounds[Random.Range(0, data.PlayerAttackSounds.Length)]);
+       //Animation loop
+    }
+
+    void AttackTick()
+    {
+        foreach (Bubble bubble in GameManager.sInstance.GetAllBubbles())
+        {
+            if(bubble.playerIndex != data.index)
+            {
+                if(Vector3.Distance(bubble.transform.position,transform.position)-(bubble.transform.localScale.x / 2.0f) < data.AttackRange)
+                {
+                    bubble.TakeDamage(data.Damage * Time.fixedDeltaTime);
+                }
+            }
+        }
+    }
+
+    public void StopAttacking()
+    {
+        if (!isAttacking)
+            return;
+        isAttacking = false;
+        audioSource.loop = false;
+        audioSource.Stop();
+
+        //Resume standard animation
     }
 }
