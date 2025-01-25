@@ -117,7 +117,6 @@ public class GameManager : MonoBehaviour
         foreach(Player p in Players)
         {
             bubbles.AddRange(p.Bubbles);
-            Debug.Log(p.Bubbles.Count);
         }
         return bubbles;
     }

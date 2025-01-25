@@ -13,21 +13,30 @@ public class Bubble : MonoBehaviour
 
     List<GameObject> touchingballs = new List<GameObject>();
 
+    Material material;
+
+    float currentAttackAnimationValue = 0.0f;
 
     void Start()
     {
+        material = GetComponent<MeshRenderer>().material;
         rb = GetComponent<Rigidbody>();
         Health = transform.localScale.magnitude;
     }
     public void TakeDamage(float damage)
-    {
-        //play animation
-
+    { 
+        currentAttackAnimationValue = 0.2f;
         Health -= damage;
         if(Health <= 0)
         {
             PopBubble();
         }
+    }
+
+    private void Update()
+    {
+        currentAttackAnimationValue = Mathf.Lerp(currentAttackAnimationValue, 0, currentAttackAnimationValue - Time.deltaTime);
+        material.SetFloat("_isUnderAttack", currentAttackAnimationValue);
     }
 
     private void FixedUpdate()
