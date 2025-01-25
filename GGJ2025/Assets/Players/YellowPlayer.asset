@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   Score: 0
-  AttackRange: 0.5
-  Damage: 5
+  Name: 
+  AttackRange: 0.8
+  Damage: 6
   Speed: 6
   BubbleEjectionForce: 3
   BubbleGrowRate: 1.5
@@ -37,6 +38,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b457f7da34407fb458fafe1d28137c2b, type: 3}
   - {fileID: 8300000, guid: fca76c079a2d3ab41ac59256f0374ce4, type: 3}
   - {fileID: 8300000, guid: b7667548d61a16f4696246a84d6b557a, type: 3}
+  GameoverSceneName: {fileID: 8684930398707058181, guid: 005f641749d8e3042abacf16bd0bbcc4,
+    type: 3}
   PlayerPrefab: {fileID: 880772864235684918, guid: 33973cd92bb65e74cb223130b7afdeca,
     type: 3}
   BubblePrefab: {fileID: 5846254188507200889, guid: 5eaaacf0735f7e14d9e283427733780f,

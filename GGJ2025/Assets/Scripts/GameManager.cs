@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class GameManager : MonoBehaviour
     List<PlayerController> PlayerControllers = new List<PlayerController>();
     public DeviceDisplayer deviceDisplayerPrefab;
     public GameObject deviceDisplayGrid;
+
+
+    public float MatchTime = 60;
+    bool isGameActive = false;
+
+    TextMeshProUGUI GameTimerText;
+    TextMeshProUGUI GameOverText;
+    GameObject GameOverTitleGrid;
 
     void SpawnNewPlayer(PlayerData data)
     {
@@ -56,7 +65,6 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
         GetComponent<PlayerInputManager>().DisableJoining();
         foreach (var controller in PlayerControllers)
         {
@@ -65,6 +73,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
 
         SceneManager.sceneLoaded += GameSceneLoaded;
+        SceneManager.sceneLoaded += OnGameOverSceneLoaded;
     }
 
     public void GameSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -89,6 +98,11 @@ public class GameManager : MonoBehaviour
                 NumberOfConnectedPlayers++;
             }
         }
+
+        GameTimerText = GameObject.FindWithTag("TimerText").GetComponent<TextMeshProUGUI>();
+        GameOverText = GameObject.FindWithTag("GameOverText").GetComponent<TextMeshProUGUI>();
+
+        isGameActive = true;
     }
 
     public void RespawnPlayer(int index)
@@ -115,11 +129,67 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        StartMap();
+        if(isGameActive)
+        {
+            UpdateGameUI();
+            ManageGameState();
+        }
+        else
+        {
+            StartMap();
+        }
     }
+
+    void UpdateGameUI()
+    {
+        MatchTime -= Time.deltaTime;
+        if(MatchTime>10.0f)
+        {
+            int time = (int)MatchTime;
+            GameTimerText.text = time.ToString();
+        }
+        else
+        {
+            GameTimerText.color = Color.red;
+            GameTimerText.text = MatchTime.ToString("#.#");
+        }
+        if (MatchTime <= 0)
+        {
+            GameTimerText.gameObject.SetActive(false);
+            GameOverText.text = "GAME OVER";
+            isGameActive = false;
+        }
+    }
+
+    void ManageGameState()
+    {
+        if(MatchTime <= 0)
+        {
+            foreach (var device in PlayerControllers)
+            {
+                device.GetComponent<PlayerInput>().DeactivateInput();
+            }
+
+            StartCoroutine(LoadSceneTimed(2, 3.0f));
+        }
+    }
+
+    void OnGameOverSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex != 2)
+            return;
+
+        GameOverTitleGrid = GameObject.FindWithTag("PlayerTitleGrid");
+        foreach(Player p in Players.OrderByDescending(p => p.Bubbles.Count))
+        {
+            GameObject go = Instantiate(p.data.GameoverSceneName, GameOverTitleGrid.transform);
+            go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.Bubbles.Count;
+        }
+
+    }
+
 
     public List<Bubble> GetAllBubbles()
     {
@@ -130,5 +200,11 @@ public class GameManager : MonoBehaviour
             bubbles.AddRange(p.Bubbles);
         }
         return bubbles;
+    }
+
+    IEnumerator LoadSceneTimed(int index, float t)
+    {
+        yield return new WaitForSecondsRealtime(t);
+        SceneManager.LoadScene(index);
     }
 }

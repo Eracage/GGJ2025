@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     public int Score = 0;
     [Space]
     [Header("Stats")]
+    public string Name;
     public float AttackRange = 2.5f;
     public float Damage = 0.5f;
     public float Speed = 3.5f;
@@ -24,6 +25,7 @@ public class PlayerData : ScriptableObject
     public AudioClip[] BubblePopClips;
     [Space]
     [Header("Prefabs")]
+    public GameObject GameoverSceneName;
     public GameObject PlayerPrefab;
     public GameObject BubblePrefab;
 
