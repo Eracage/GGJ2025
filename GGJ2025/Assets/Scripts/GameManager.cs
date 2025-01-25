@@ -8,9 +8,10 @@ public class GameManager : MonoBehaviour
 
     public Vector3[] PlayerSpawnpoints;
 
-    List<GameObject> Players = new List<GameObject>();
+    public int NumberOfPlayersToSpawn;
     public List<PlayerData> Playerdatas = new List<PlayerData>();
 
+    List<GameObject> Players = new List<GameObject>();
     void SpawnNewPlayer(PlayerData data)
     {
         GameObject current = Instantiate(data.PlayerPrefab, PlayerSpawnpoints[Players.Count], Quaternion.identity);
@@ -33,9 +34,9 @@ public class GameManager : MonoBehaviour
             sInstance = this;
         }
 
-        foreach(PlayerData data in Playerdatas)
+        for(int i = 0; i < NumberOfPlayersToSpawn; i++)
         {
-            SpawnNewPlayer(data);
+            SpawnNewPlayer(Playerdatas[i]);
         }
     }
 

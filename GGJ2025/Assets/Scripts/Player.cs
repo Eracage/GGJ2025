@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    AudioSource audioSource;
     public PlayerData data;
     public Transform BubbleSpawnPosition;
 
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         lastframeposition = transform.position;
     }
 
@@ -22,7 +24,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (isHoldingBubble)
+        {
             GrowBubble();
+        }
+        else 
+        {
+            audioSource.loop = false;
+            audioSource.pitch = 1.0f;
+        }
         DebugControls();
     }
 
@@ -42,29 +51,59 @@ public class Player : MonoBehaviour
         {
             isHoldingBubble = true;
             bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
+
+            audioSource.pitch = Random.Range(1.2f,1.6f);
+            audioSource.loop = true;
+            audioSource.PlayOneShot(data.BubbleFillSound);
         }
         if (Input.GetKeyUp(KeyCode.Space) && isHoldingBubble)
         {
             ReleaseBubble();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isHoldingBubble)
         {
-            //attack
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+        audioSource.PlayOneShot(data.PlayerAttackSounds[Random.Range(0, 3)]);
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.right, out hit, data.AttackRange))
+        {
+            Bubble BubbleComponent; 
+
+            if(hit.transform.gameObject.TryGetComponent(out BubbleComponent))
+            {
+                if(BubbleComponent.playerIndex != data.index)
+                {
+                    BubbleComponent.TakeDamage(data.Damage);
+                }
+            }
         }
     }
 
     void ReleaseBubble()
     {
+        audioSource.Stop();
+        data.Bubbles.Add(bubble);
         bubble.transform.parent = null;
         bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.position - lastframeposition) * data.BubbleEjectionForce, ForceMode.Impulse);
-        bubble.AddComponent<Bubble>().playerIndex = data.index;
+        Bubble BubbleComponent = bubble.AddComponent<Bubble>();
+        BubbleComponent.playerIndex = data.index;
+        BubbleComponent.BubblepopClips = data.BubblePopClips;
         bubble = null;
         isHoldingBubble = false;
+        audioSource.PlayOneShot(data.BubblePopClips[Random.Range(0, 3)]);
     }
 
     void GrowBubble()
     {
+        audioSource.pitch += Time.deltaTime;
+
         bubble.transform.localScale += bubble.transform.localScale * data.BubbleGrowRate * Time.deltaTime;
         bubble.transform.position =  transform.position + new Vector3(bubble.transform.localScale.x, 0, 0);
         if (bubble.transform.localScale.x > 3)

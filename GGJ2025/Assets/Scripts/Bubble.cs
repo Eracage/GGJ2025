@@ -9,6 +9,8 @@ public class Bubble : MonoBehaviour
     public int playerIndex;
     Rigidbody rb;
 
+    public AudioClip[] BubblepopClips;
+
     List<GameObject> touchingballs = new List<GameObject>();
 
 
