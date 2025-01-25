@@ -28,6 +28,21 @@ public class Bubble : MonoBehaviour
     {
         List<GameObject> objstoremove = new List<GameObject>();
 
+        for (int i = touchingballs.Count - 1; i >= 0; --i)
+        {
+            if (!touchingballs[i])
+            {
+                touchingballs.RemoveAt(i);
+                continue;
+            }
+            if (Vector3.Distance(gameObject.transform.position, touchingballs[i].transform.position) > 2.2f)
+            {
+                touchingballs.RemoveAt(i);
+                continue;
+            }
+            rb.AddForce(Vector3.Normalize(touchingballs[i].transform.position - transform.position) * 0.3f, ForceMode.Acceleration);
+        }
+
         foreach(GameObject go in touchingballs)
         {
             if (Vector3.Distance(gameObject.transform.position, go.transform.position) < 2.2f)
@@ -55,7 +70,7 @@ public class Bubble : MonoBehaviour
         if(BubbleController.sInstance.GreenBubbles.Contains(gameObject) && BubbleController.sInstance.GreenBubbles.Contains(collision.gameObject))
         {
             touchingballs.Add(collision.gameObject);
-        }else if (BubbleController.sInstance.RedBubbles.Contains(gameObject) && BubbleController.sInstance.RedBubbles.Contains(collision.gameObject))
+        } else if (BubbleController.sInstance.RedBubbles.Contains(gameObject) && BubbleController.sInstance.RedBubbles.Contains(collision.gameObject))
         {
             touchingballs.Add(collision.gameObject);
         }
