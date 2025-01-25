@@ -63,7 +63,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2974579387058884646}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMovement
+        m_MethodName: OnMovement1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2974579387058884646}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnAction
+        m_MethodName: OnAction1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -91,9 +91,105 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1a623700-6f7d-467d-a02f-19e7f2ac25d6
     m_ActionName: BubbleControl/Action[/Keyboard/rightCtrl,/Keyboard/numpad0,/Keyboard/space,/Keyboard/leftCtrl,/Mouse/leftButton,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2974579387058884646}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMovement2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 42ecc502-c3d3-4175-95b1-a1315ad43044
+    m_ActionName: BubbleControl/Movement2[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows1/rightStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2974579387058884646}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAction2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cd44e2b6-741a-4276-9eba-6437570d462d
+    m_ActionName: BubbleControl/Action2[/Keyboard/rightCtrl,/Keyboard/numpad0,/XInputControllerWindows1/leftTrigger,/XInputControllerWindows1/leftShoulder,/Keyboard/space,/Keyboard/leftCtrl,/Keyboard/period,/Keyboard/comma]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2974579387058884646}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 45c43d5f-6465-41fc-87cc-44ae16e63263
+    m_ActionName: PlayerSelect/Movement1[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows1/leftStick,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2974579387058884646}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnSelect1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a0aea752-4fae-4071-86c3-b842e2932e4d
+    m_ActionName: PlayerSelect/Action1[/Keyboard/space,/Keyboard/leftShift,/XInputControllerWindows1/leftTrigger,/XInputControllerWindows1/leftShoulder,/Mouse/leftButton,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2974579387058884646}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2f539ec9-7e75-4a57-8ec4-c1fe782945f3
+    m_ActionName: PlayerSelect/Movement2[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows1/rightStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2974579387058884646}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnSelect2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3ff7bcd1-d083-482a-8808-8171d667d4f6
+    m_ActionName: PlayerSelect/Action2[/Keyboard/rightCtrl,/Keyboard/numpad0,/XInputControllerWindows1/leftTrigger,/XInputControllerWindows1/leftShoulder,/Keyboard/space,/Keyboard/leftCtrl,/Keyboard/period,/Keyboard/comma]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: BubbleControl
+  m_DefaultActionMap: PlayerSelect
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &2974579387058884646
@@ -108,9 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3523e57a65a14f8b5f58ddaefc18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1ID: -1
   controlledPlayer1: {fileID: 0}
-  Player1Active: 1
-  Player2ID: -1
+  Player1Active: 0
+  Player1Ready: 0
   controlledPlayer2: {fileID: 0}
   Player2Active: 0
+  Player2Ready: 0

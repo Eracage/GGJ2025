@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public List<PlayerData> Playerdatas = new List<PlayerData>();
 
     List<PlayerController> PlayerControllers = new List<PlayerController>();
+    public DeviceDisplayer deviceDisplayerPrefab;
+    public GameObject deviceDisplayGrid;
 
     public float MatchTime = 60;
     bool isGameActive = false;
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
     {
         playerController.transform.SetParent(transform);
         PlayerControllers.Add(playerController);
+        var go = Instantiate(deviceDisplayerPrefab, deviceDisplayGrid.transform);
+        go.GetComponent<DeviceDisplayer>().playerInput = playerController.GetComponent<PlayerInput>();
     }
 
     public void StartMap()
@@ -46,17 +50,24 @@ public class GameManager : MonoBehaviour
             return;
         }
         int playerCount = 0;
+        int readyPlayerCount = 0;
         foreach (var controller in PlayerControllers)
         {
             playerCount += controller.Player1Active ? 1 : 0;
+            readyPlayerCount += (controller.Player1Ready && controller.Player1Active) ? 1 : 0;
             playerCount += controller.Player2Active ? 1 : 0;
+            readyPlayerCount += (controller.Player2Ready && controller.Player2Active) ? 1 : 0;
         }
-        if (playerCount < 2)
+        if (playerCount < 2 || readyPlayerCount < playerCount)
         {
             return;
         }
 
         GetComponent<PlayerInputManager>().DisableJoining();
+        foreach (var controller in PlayerControllers)
+        {
+            controller.GetComponent<PlayerInput>().SwitchCurrentActionMap("BubbleControl");
+        }
         SceneManager.LoadScene(1);
 
         SceneManager.sceneLoaded += GameSceneLoaded;
