@@ -39,7 +39,7 @@ public class Bubble : MonoBehaviour
                 touchingballs.RemoveAt(i);
                 continue;
             }
-            if (Vector3.Distance(gameObject.transform.position, touchingballs[i].transform.position) > transform.localScale.x + go.transform.localScale.x)
+            if (Vector3.Distance(gameObject.transform.position, touchingballs[i].transform.position) > transform.localScale.x + touchingballs[i].transform.localScale.x)
             {
                 touchingballs.RemoveAt(i);
                 continue;
