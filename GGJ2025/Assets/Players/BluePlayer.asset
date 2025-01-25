@@ -12,14 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e7698f0b82f84cbdb3b38d87cb569, type: 3}
   m_Name: BluePlayer
   m_EditorClassIdentifier: 
-  index: 1
+  index: 3
   Score: 0
-  Damage: 0.5
-  Speed: 3.5
+  AttackRange: 0.5
+  Damage: 5
+  Speed: 6
   BubbleEjectionForce: 3
   BubbleGrowRate: 1.5
-  PlayerPrefab: {fileID: 880772864235684918, guid: 33973cd92bb65e74cb223130b7afdeca,
+  BubbleFillSound: {fileID: 8300000, guid: 477370b4759d9084d8b7d3476785806e, type: 3}
+  PlayerDeathSounds:
+  - {fileID: 8300000, guid: 2c91723156fdb7b47b3b5d1926775cfd, type: 3}
+  - {fileID: 8300000, guid: 8871253c653309c4096c92a59e21b1a9, type: 3}
+  - {fileID: 8300000, guid: d0dd1c57cf808454e86d2a16f4497a19, type: 3}
+  - {fileID: 8300000, guid: 690329aedcb5f6a4bb4db6f051c04952, type: 3}
+  - {fileID: 8300000, guid: 06684795f6025144d9a0aedce7a8e78c, type: 3}
+  PlayerAttackSounds:
+  - {fileID: 8300000, guid: a2cdad4da37b1724f861f41aa18b8724, type: 3}
+  - {fileID: 8300000, guid: 5c7487ff2f5fd3b44b4ef6b63dc38db4, type: 3}
+  - {fileID: 8300000, guid: 9ef7c18bd8ae3144ab6fd0988585bf71, type: 3}
+  - {fileID: 8300000, guid: d32690e28270d3741a8e413707ab4234, type: 3}
+  PlayerCelebrationSounds:
+  - {fileID: 8300000, guid: be38c400f8429164cabaf6fa5b13c55c, type: 3}
+  BubblePopClips:
+  - {fileID: 8300000, guid: b457f7da34407fb458fafe1d28137c2b, type: 3}
+  - {fileID: 8300000, guid: fca76c079a2d3ab41ac59256f0374ce4, type: 3}
+  - {fileID: 8300000, guid: b7667548d61a16f4696246a84d6b557a, type: 3}
+  PlayerPrefab: {fileID: 311841012121886568, guid: d4a305e89795a9a4eb109cc4b76544c3,
     type: 3}
-  BubblePrefab: {fileID: 5846254188507200889, guid: 5eaaacf0735f7e14d9e283427733780f,
+  BubblePrefab: {fileID: 2451496374063419930, guid: c7360083dcbe97443acca5d1aab49896,
     type: 3}
-  Bubbles: []

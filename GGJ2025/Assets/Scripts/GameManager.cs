@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     int NumberOfConnectedPlayers = 0;
 
-    List<Player> Players = new List<Player>();
+    public List<Player> Players = new List<Player>();
     public List<PlayerData> Playerdatas = new List<PlayerData>();
 
     List<PlayerController> PlayerControllers = new List<PlayerController>();
@@ -102,11 +103,11 @@ public class GameManager : MonoBehaviour
             sInstance = this;
         } else
         {
-            DestroyImmediate(this.gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -118,5 +119,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         StartMap();
+    }
+
+    public List<Bubble> GetAllBubbles()
+    {
+        List<Bubble> bubbles = new List<Bubble>();
+
+        foreach(Player p in Players)
+        {
+            bubbles.AddRange(p.Bubbles);
+        }
+        return bubbles;
     }
 }
