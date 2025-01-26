@@ -8,6 +8,13 @@ public class SiblingIndex : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DesiredPosition < 0)
+        {
+            int pos = transform.parent.childCount + DesiredPosition;
+            Debug.Log(pos + " from " + DesiredPosition);
+            transform.SetSiblingIndex(pos);
+            return;
+        }
         transform.SetSiblingIndex(DesiredPosition);
     }
 }
