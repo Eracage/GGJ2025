@@ -14,6 +14,7 @@ public class PlayerData : ScriptableObject
     public float AttackRange = 2.5f;
     public float Damage = 0.5f;
     public float Speed = 3.5f;
+    public float BubbleCreationCooldown = 0.5f;
     public float BubbleEjectionForce = 3.0f;
     public float BubbleGrowRate = 1.5f;
     [Space]
@@ -28,5 +29,4 @@ public class PlayerData : ScriptableObject
     public GameObject GameoverSceneName;
     public GameObject PlayerPrefab;
     public GameObject BubblePrefab;
-
 }

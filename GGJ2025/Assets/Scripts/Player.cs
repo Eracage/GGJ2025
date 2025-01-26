@@ -11,7 +11,11 @@ public class Player : MonoBehaviour
     public List<Bubble> Bubbles = new List<Bubble>();
     bool isAttacking = false;
     bool isHoldingBubble = false;
+
+    float lastBubbleCreationTime;
     GameObject bubble;
+
+    public int score;
 
     Vector3 lastframeposition;
 
@@ -23,6 +27,7 @@ public class Player : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         lastframeposition = transform.position;
+        lastBubbleCreationTime = Time.time;
     }
 
     // Update is called once per frame
@@ -43,14 +48,33 @@ public class Player : MonoBehaviour
         Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * data.Speed * Time.fixedDeltaTime;
         transform.Translate(movement);
 
+        UpdateScore();
+
         if (isAttacking)
             AttackTick();
     }
 
+    void UpdateScore()
+    {
+        float currentscore = 0;
+        foreach(Bubble b in Bubbles)
+        {
+            currentscore += b.transform.localScale.x;
+        }
+        score = (int)currentscore;
+    }
+
     public void StartGrowingBubble()
     {
-        isHoldingBubble = true;
-        bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
+        if (isHoldingBubble)
+            return;
+
+        if(Time.time - lastBubbleCreationTime > data.BubbleCreationCooldown)
+        {
+            isHoldingBubble = true;
+            bubble = Instantiate(data.BubblePrefab, BubbleSpawnPosition);
+        }
+
     }
 
 
@@ -84,6 +108,7 @@ public class Player : MonoBehaviour
         bubble = null;
         isHoldingBubble = false;
         audioSource.PlayOneShot(data.BubblePopClips[Random.Range(0, data.BubblePopClips.Length)]);
+        lastBubbleCreationTime = Time.time;
     }
 
     public void StartAttack()
