@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public DeviceDisplayer deviceDisplayerPrefab;
     public GameObject deviceDisplayGrid;
 
+    bool tryStartGame = false;
 
     public float MatchTime = 60;
     bool isGameActive = false;
@@ -28,6 +29,34 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI GameTimerText;
     TextMeshProUGUI GameOverText;
     GameObject GameOverTitleGrid;
+
+    public enum GameState
+    {
+        Undefined,
+        PlayerSelect,
+        Game,
+        Highscore
+    }
+
+    public GameState currentGameState = GameState.Undefined;
+
+    void Awake()
+    {
+        if (sInstance == null)
+        {
+            sInstance = this;
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        OnSceneLoaded(SceneManager.GetActiveScene(), new LoadSceneMode());
+    }
 
     void SpawnNewPlayer(PlayerData data)
     {
@@ -46,12 +75,10 @@ public class GameManager : MonoBehaviour
         go.GetComponent<DeviceDisplayer>().playerInput = playerController.GetComponent<PlayerInput>();
     }
 
-    public void StartMap()
+    public void CheckForPlayersReady()
     {
-        if (NumberOfConnectedPlayers > 0)
-        {
+        if (!tryStartGame)
             return;
-        }
         int playerCount = 0;
         int readyPlayerCount = 0;
         foreach (var controller in PlayerControllers)
@@ -65,23 +92,49 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        tryStartGame = false;
         GetComponent<PlayerInputManager>().DisableJoining();
-        foreach (var controller in PlayerControllers)
-        {
-            controller.GetComponent<PlayerInput>().SwitchCurrentActionMap("BubbleControl");
-        }
         SceneManager.LoadScene(1);
-
-        SceneManager.sceneLoaded += GameSceneLoaded;
-        SceneManager.sceneLoaded += OnGameOverSceneLoaded;
     }
 
-    public void GameSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex != 1)
+        switch (scene.buildIndex)
         {
-            return;
+            case 0:
+                currentGameState = GameState.PlayerSelect;
+                PlayerSelectLoaded();
+                break;
+            case 1:
+                currentGameState = GameState.Game;
+                GameSceneLoaded();
+                break;
+            case 2:
+                currentGameState = GameState.Highscore;
+                HighscoreSceneLoaded();
+                break;
         }
+    }
+
+    void PlayerSelectLoaded()
+    {
+        var grid = GameObject.FindWithTag("DeviceGrid");
+        if (grid)
+            deviceDisplayGrid = grid;
+        foreach (var control in PlayerControllers)
+        {
+            var go = Instantiate(deviceDisplayerPrefab, deviceDisplayGrid.transform);
+            go.GetComponent<DeviceDisplayer>().playerInput = control.GetComponent<PlayerInput>();
+        }
+        GetComponent<PlayerInputManager>().EnableJoining();
+        tryStartGame = true;
+    }
+
+    void GameSceneLoaded()
+    {
+        Players = new List<Player>();
+        MatchTime = 60;
+        SetInputToMenuOrGame(true);
         NumberOfConnectedPlayers = 0;
         foreach (var controller in PlayerControllers)
         {
@@ -89,12 +142,20 @@ public class GameManager : MonoBehaviour
             {
                 SpawnNewPlayer(Playerdatas[NumberOfConnectedPlayers]);
                 controller.controlledPlayer1 = Players[NumberOfConnectedPlayers];
+                if (!controller.Player2Active)
+                {
+                    controller.controlledPlayer2 = Players[NumberOfConnectedPlayers];
+                }
                 NumberOfConnectedPlayers++;
             }
             if (controller.Player2Active)
             {
                 SpawnNewPlayer(Playerdatas[NumberOfConnectedPlayers]);
                 controller.controlledPlayer2 = Players[NumberOfConnectedPlayers];
+                if (!controller.Player1Active)
+                {
+                    controller.controlledPlayer1 = Players[NumberOfConnectedPlayers];
+                }
                 NumberOfConnectedPlayers++;
             }
         }
@@ -105,23 +166,15 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
     }
 
-    public void RespawnPlayer(int index)
+    void HighscoreSceneLoaded()
     {
-        Players[index].transform.position = PlayerSpawnpoints[index];
-    }
-
-    void Awake()
-    {
-        if(sInstance == null)
+        GameOverTitleGrid = GameObject.FindWithTag("PlayerTitleGrid");
+        foreach (Player p in Players.OrderByDescending(p => p.Bubbles.Count))
         {
-            sInstance = this;
-        } else
-        {
-            DestroyImmediate(gameObject);
-            return;
+            GameObject go = Instantiate(p.data.GameoverSceneName, GameOverTitleGrid.transform);
+            go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.Bubbles.Count;
         }
-
-        DontDestroyOnLoad(gameObject);
+        LoadSceneTimed(0, 10);
     }
 
     // Start is called before the first frame update
@@ -131,14 +184,22 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(isGameActive)
+        switch (currentGameState)
         {
-            UpdateGameUI();
-            ManageGameState();
-        }
-        else
-        {
-            StartMap();
+            case GameState.PlayerSelect:
+                CheckForPlayersReady();
+                break;
+            case GameState.Game:
+                if (isGameActive)
+                {
+                    UpdateGameUI();
+                    ManageGameState();
+                }
+                break;
+            case GameState.Highscore:
+                break;
+            default:
+                break;
         }
     }
 
@@ -167,27 +228,18 @@ public class GameManager : MonoBehaviour
     {
         if(MatchTime <= 0)
         {
-            foreach (var device in PlayerControllers)
-            {
-                device.GetComponent<PlayerInput>().DeactivateInput();
-            }
+            SetInputToMenuOrGame(false);
 
-            StartCoroutine(LoadSceneTimed(2, 3.0f));
+            LoadSceneTimed(2, 3.0f);
         }
     }
 
-    void OnGameOverSceneLoaded(Scene scene, LoadSceneMode mode)
+    void SetInputToMenuOrGame(bool game)
     {
-        if (scene.buildIndex != 2)
-            return;
-
-        GameOverTitleGrid = GameObject.FindWithTag("PlayerTitleGrid");
-        foreach(Player p in Players.OrderByDescending(p => p.Bubbles.Count))
+        foreach (var controller in PlayerControllers)
         {
-            GameObject go = Instantiate(p.data.GameoverSceneName, GameOverTitleGrid.transform);
-            go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.Bubbles.Count;
+            controller.GetComponent<PlayerInput>().SwitchCurrentActionMap(game ? "BubbleControl" : "PlayerSelect");
         }
-
     }
 
 
@@ -202,7 +254,12 @@ public class GameManager : MonoBehaviour
         return bubbles;
     }
 
-    IEnumerator LoadSceneTimed(int index, float t)
+    void LoadSceneTimed(int index, float t)
+    {
+        StartCoroutine(CoroutineLoadSceneTimed(index, t));
+    }
+
+    IEnumerator CoroutineLoadSceneTimed(int index, float t)
     {
         yield return new WaitForSecondsRealtime(t);
         SceneManager.LoadScene(index);

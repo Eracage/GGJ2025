@@ -7,6 +7,7 @@ TagManager:
   - TimerText
   - GameOverText
   - PlayerTitleGrid
+  - DeviceGrid
   layers:
   - Default
   - TransparentFX

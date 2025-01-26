@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 153785085}
   m_Layer: 5
   m_Name: DeviceGrid
-  m_TagString: Untagged
+  m_TagString: DeviceGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -770,12 +770,6 @@ PrefabInstance:
       propertyPath: deviceDisplayGrid
       value: 
       objectReference: {fileID: 153785083}
-    - target: {fileID: 6615978720911330170, guid: 0bbc23c202ed4a0489e6f3f0c2f29b44,
-        type: 3}
-      propertyPath: deviceDisplayerPrefab
-      value: 
-      objectReference: {fileID: 349795292021707088, guid: 1227735651e206b4fb9b659d1ff21a88,
-        type: 3}
     - target: {fileID: 6615978720911330171, guid: 0bbc23c202ed4a0489e6f3f0c2f29b44,
         type: 3}
       propertyPath: m_RootOrder
