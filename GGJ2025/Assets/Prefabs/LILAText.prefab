@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4742531688868566468}
   - component: {fileID: 4742531688868566475}
   m_Layer: 5
-  m_Name: PinkText
+  m_Name: LILAText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PINK
+  m_text: LILA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a64033638fd1824e8016437285159fd, type: 2}
   m_sharedMaterial: {fileID: 7629745649996632919, guid: 9a64033638fd1824e8016437285159fd,
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290977023
-  m_fontColor: {r: 1, g: 0.10849059, b: 0.76402605, a: 1}
+    rgba: 4292088705
+  m_fontColor: {r: 0.5064828, g: 0.07440368, b: 0.8301887, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

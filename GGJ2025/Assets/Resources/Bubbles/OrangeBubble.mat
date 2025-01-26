@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YellowBubble
+  m_Name: OrangeBubble
   m_Shader: {fileID: -6465566751694194690, guid: fda853e095cf0a944b9596a84306e18b,
     type: 3}
   m_ValidKeywords: []
@@ -39,8 +39,8 @@ Material:
     - _QueueOffset: 0
     - _isUnderAttack: 0
     m_Colors:
-    - _Color1: {r: 1, g: 0.97428435, b: 0.32549024, a: 0}
-    - _Color2: {r: 1, g: 0.9996024, b: 0.5896226, a: 0}
+    - _Color1: {r: 1, g: 0.434973, b: 0.15566039, a: 0}
+    - _Color2: {r: 0.9056604, g: 0.5285863, b: 0.21787111, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5210800253365775984
 MonoBehaviour:

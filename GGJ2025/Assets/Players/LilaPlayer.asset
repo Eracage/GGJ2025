@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e17e7698f0b82f84cbdb3b38d87cb569, type: 3}
-  m_Name: PinkPlayer
+  m_Name: LilaPlayer
   m_EditorClassIdentifier: 
   index: 4
   Score: 0
-  Name: 
-  AttackRange: 0.8
+  Name: Lila
+  AttackRange: 1
   Damage: 6
   Speed: 6
-  BubbleEjectionForce: 3
+  BubbleCreationCooldown: 0.5
+  BubbleEjectionForce: 4
   BubbleGrowRate: 1.5
   BubbleFillSound: {fileID: 8300000, guid: 477370b4759d9084d8b7d3476785806e, type: 3}
   PlayerDeathSounds:

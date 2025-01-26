@@ -16,18 +16,24 @@ public class Player : MonoBehaviour
     GameObject bubble;
 
     public int score;
+    public Vector3 lookatrotation;
+    public Transform modelHolder;
 
     Vector3 lastframeposition;
 
     Vector2 PlayerMovement = Vector2.zero;
     public Vector2 PlayerMovementInput = Vector2.zero;
 
+    Animator squidAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
+        squidAnimator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
         lastframeposition = transform.position;
         lastBubbleCreationTime = Time.time;
+        lookatrotation = transform.right;
     }
 
     // Update is called once per frame
@@ -35,6 +41,8 @@ public class Player : MonoBehaviour
     {
         if (isHoldingBubble)
             GrowBubble();
+
+        UpdateAnimationStates();
     }
 
     private void LateUpdate()
@@ -45,6 +53,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMovement = Vector2.Lerp(PlayerMovement, PlayerMovementInput, 0.1f);
+        RotateModel();
         Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * data.Speed * Time.fixedDeltaTime;
         transform.Translate(movement);
 
@@ -52,6 +61,39 @@ public class Player : MonoBehaviour
 
         if (isAttacking)
             AttackTick();
+    }
+
+    void UpdateAnimationStates()
+    {
+        if (isAttacking)
+        {
+
+            squidAnimator.SetBool("IsSpinning", true);
+        }
+        else
+        {
+            squidAnimator.SetBool("IsSpinning", false);
+        }
+        if(PlayerMovementInput.magnitude>0)
+        {
+            squidAnimator.SetBool("IsSwimming", true);
+        }
+        else
+        {
+            squidAnimator.SetBool("IsSwimming", false);
+        }
+    }
+
+    void RotateModel()
+    {
+        if(!isAttacking && PlayerMovement.magnitude>0)
+        {
+
+            modelHolder.transform.rotation = Quaternion.Slerp(modelHolder.transform.rotation, Quaternion.LookRotation(new Vector3(PlayerMovement.x,PlayerMovement.y,0.0f)), Time.deltaTime * 10f);
+        }else
+        {
+            modelHolder.transform.rotation = Quaternion.Slerp(modelHolder.rotation, Quaternion.LookRotation(Vector3.up), Time.deltaTime * 10f);
+        }
     }
 
     void UpdateScore()
@@ -82,7 +124,7 @@ public class Player : MonoBehaviour
     {
         audioSource.pitch += Time.deltaTime;
         bubble.transform.localScale += bubble.transform.localScale * data.BubbleGrowRate * Time.deltaTime;
-        bubble.transform.position =  transform.position + new Vector3(bubble.transform.localScale.x, 0, 0);
+        bubble.transform.position =  BubbleSpawnPosition.position + BubbleSpawnPosition.forward * bubble.transform.localScale.x;
         if (bubble.transform.localScale.x > 3)
         {
             ReleaseBubble();
@@ -100,7 +142,7 @@ public class Player : MonoBehaviour
         audioSource.pitch = 1.0f;
         audioSource.Stop();
         bubble.transform.parent = null;
-        bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.position - lastframeposition) * data.BubbleEjectionForce, ForceMode.Impulse);
+        bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(BubbleSpawnPosition.forward) * data.BubbleEjectionForce, ForceMode.Impulse);
         Bubble BubbleComponent = bubble.AddComponent<Bubble>();
         Bubbles.Add(BubbleComponent);
         BubbleComponent.playerIndex = data.index;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6390339604836589964
+--- !u!1001 &9014508515114853680
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 29e5db768d96d414a96a31e315c1aaaf, type: 2}
+      objectReference: {fileID: 2100000, guid: 0b2b52ce21f4cc94b95c913a0d2e414f, type: 2}
     - target: {fileID: 6095110014093452679, guid: 96ad582900f57ff469cbedf9ce9fe9f8,
         type: 3}
       propertyPath: m_RootOrder
@@ -71,11 +71,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 14e424a0121c69d44b009a4e914df32b, type: 2}
+      objectReference: {fileID: 2100000, guid: 6f21a8b0944f8b24fb80ac8eb21e4758, type: 2}
     - target: {fileID: 6095110014093452730, guid: 96ad582900f57ff469cbedf9ce9fe9f8,
         type: 3}
       propertyPath: m_Name
-      value: YellowPlayer
+      value: PinkPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96ad582900f57ff469cbedf9ce9fe9f8, type: 3}

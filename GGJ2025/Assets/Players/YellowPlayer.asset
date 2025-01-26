@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   Score: 0
-  Name: 
-  AttackRange: 0.8
+  Name: Yellow
+  AttackRange: 1
   Damage: 6
   Speed: 6
-  BubbleEjectionForce: 3
+  BubbleCreationCooldown: 0.5
+  BubbleEjectionForce: 4
   BubbleGrowRate: 1.5
   BubbleFillSound: {fileID: 8300000, guid: 477370b4759d9084d8b7d3476785806e, type: 3}
   PlayerDeathSounds:
