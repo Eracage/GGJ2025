@@ -348,15 +348,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Keyboard controls:\n   Left:\n      WASD - Movement\n      Space - Attack
-    / Activate Player\n      LShift - Blow Bubble / \n                    Deactivate
-    Player\n   Right:\n      Arrows - Movement\n      RCtrl / . - Attack / Activate
-    Player\n      Num0 / , - Blow Bubble /\n                    Deactivate Player\n\nGamepad
-    controls:\n   Left:\n      Left Stick - Movement\n      Left Trigger - Attack
-    /\n                            Activate Player\n      Left Shoulder - Blow Bubble
-    /\n                            Deactivate Player\n   Right:\n      Right Stick
-    - Movement\n      Right Trigger - Attack /\n                            Activate
-    Player\n      Right Shoulder - Blow Bubble /\n                            Deactivate
-    Player"
+    /\n                    Activate Player\n      LShift - Blow Bubble / \n                   
+    Deactivate Player\n   Right:\n      Arrows - Movement\n      RCtrl / . - Attack
+    /\n                    Activate Player\n      Num0 / , - Blow Bubble /\n                   
+    Deactivate Player\n\nGamepad controls:\n   Left:\n      Left Stick - Movement\n     
+    Left Trigger - Attack /\n                            Activate Player\n      Left
+    Shoulder - Blow Bubble /\n                            Deactivate Player\n   Right:\n     
+    Right Stick - Movement\n      Right Trigger - Attack /\n                           
+    Activate Player\n      Right Shoulder - Blow Bubble /\n                           
+    Deactivate Player"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a64033638fd1824e8016437285159fd, type: 2}
   m_sharedMaterial: {fileID: 7629745649996632919, guid: 9a64033638fd1824e8016437285159fd,

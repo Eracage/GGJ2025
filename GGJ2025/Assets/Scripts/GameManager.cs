@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public float MatchTime = 60;
     bool isGameActive = false;
 
+    public float MinTimeInScene = 2;
+
     TextMeshProUGUI GameTimerText;
     TextMeshProUGUI GameOverText;
     GameObject GameOverTitleGrid;
@@ -79,6 +81,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckForPlayersReady()
     {
+        if (Time.timeSinceLevelLoad < MinTimeInScene)
+            return;
         if (!tryStartGame)
             return;
         int playerCount = 0;
@@ -211,9 +215,34 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Highscore:
+                NewGame();
                 break;
             default:
                 break;
+        }
+    }
+
+    void NewGame()
+    {
+        if (Time.timeSinceLevelLoad < MinTimeInScene)
+            return;
+
+        int activePlayerCount = 0;
+        foreach (var controller in PlayerControllers)
+        {
+            if (controller.Player1Active)
+            {
+                activePlayerCount++;
+            }
+            if (controller.Player2Active)
+            {
+                activePlayerCount++;
+            }
+        }
+
+        if (activePlayerCount >= 2)
+        {
+            LoadSceneTimed(GameState.PlayerSelect, 0);
         }
     }
 
