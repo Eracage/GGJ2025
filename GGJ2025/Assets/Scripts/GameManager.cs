@@ -184,7 +184,6 @@ public class GameManager : MonoBehaviour
             GameObject go = Instantiate(p.data.GameoverSceneName, GameOverTitleGrid.transform);
             go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.score;
         }
-        LoadSceneTimed(GameState.MainMenu, 10);
     }
 
     // Start is called before the first frame update
