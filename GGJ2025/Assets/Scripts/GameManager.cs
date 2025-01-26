@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     void PlayerSelectLoaded()
     {
+        SetInputToMenuOrGame(false);
         var grid = GameObject.FindWithTag("DeviceGrid");
         if (grid)
             deviceDisplayGrid = grid;
@@ -191,6 +192,7 @@ public class GameManager : MonoBehaviour
 
     void HighscoreSceneLoaded()
     {
+        SetInputToMenuOrGame(false);
         GameOverTitleGrid = GameObject.FindWithTag("PlayerTitleGrid");
         foreach (Player p in Players.OrderByDescending(p => p.score))
         {

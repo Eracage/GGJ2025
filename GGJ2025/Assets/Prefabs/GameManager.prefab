@@ -68,6 +68,8 @@ MonoBehaviour:
     type: 3}
   deviceDisplayGrid: {fileID: 0}
   MatchTime: 60
+  MinTimeInPlayerSelect: 1
+  MinTimeInScoreScreen: 5
   currentGameState: 0
 --- !u!114 &37392220
 MonoBehaviour:
