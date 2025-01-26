@@ -8,6 +8,7 @@ TagManager:
   - GameOverText
   - PlayerTitleGrid
   - DeviceGrid
+  - GameMusicController
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public int score;
     public Vector3 lookatrotation;
     public Transform modelHolder;
-
+    public bool isAttackAllowed = false;
     Vector3 lastframeposition;
 
     Vector2 PlayerMovement = Vector2.zero;
@@ -150,6 +150,7 @@ public class Player : MonoBehaviour
         Bubbles.Add(BubbleComponent);
         BubbleComponent.playerIndex = data.index;
         BubbleComponent.BubblepopClips = data.BubblePopClips;
+        BubbleComponent.PopParticles = data.BubblePopPrefab;
         bubble = null;
         isHoldingBubble = false;
         audioSource.PlayOneShot(data.BubblePopClips[Random.Range(0, data.BubblePopClips.Length)]);
@@ -158,7 +159,7 @@ public class Player : MonoBehaviour
 
     public void StartAttack()
     {
-        if (isHoldingBubble || isAttacking)
+        if (isHoldingBubble || isAttacking || !isAttackAllowed)
             return;
 
         isAttacking = true;

@@ -11,6 +11,8 @@ public class Bubble : MonoBehaviour
 
     public AudioClip[] BubblepopClips;
 
+    public GameObject PopParticles;
+
     List<GameObject> touchingballs = new List<GameObject>();
 
     Material material;
@@ -62,7 +64,7 @@ public class Bubble : MonoBehaviour
     void PopBubble()
     {
         GameManager.sInstance.Players[playerIndex].Bubbles.Remove(this);
-        //Play animation
+        Destroy(Instantiate(PopParticles, transform.position, Quaternion.identity), 3.0f);
         Destroy(gameObject);
     }
 

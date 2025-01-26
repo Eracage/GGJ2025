@@ -29,4 +29,5 @@ public class PlayerData : ScriptableObject
     public GameObject GameoverSceneName;
     public GameObject PlayerPrefab;
     public GameObject BubblePrefab;
+    public GameObject BubblePopPrefab;
 }
