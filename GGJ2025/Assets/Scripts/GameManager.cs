@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     bool isGameActive = false;
     bool hasMusicfadeStarted = false;
 
-    public float MinTimeInScene = 2;
+    public float MinTimeInPlayerSelect = 2;
+    public float MinTimeInScoreScreen = 5;
 
     TextMeshProUGUI GameTimerText;
     TextMeshProUGUI GameOverText;
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckForPlayersReady()
     {
-        if (Time.timeSinceLevelLoad < MinTimeInScene)
+        if (Time.timeSinceLevelLoad < MinTimeInPlayerSelect)
             return;
         if (!tryStartGame)
             return;
@@ -223,17 +224,17 @@ public class GameManager : MonoBehaviour
 
     void NewGame()
     {
-        if (Time.timeSinceLevelLoad < MinTimeInScene)
+        if (Time.timeSinceLevelLoad < MinTimeInScoreScreen)
             return;
 
         int activePlayerCount = 0;
         foreach (var controller in PlayerControllers)
         {
-            if (controller.Player1Active)
+            if (controller.Player1Ready)
             {
                 activePlayerCount++;
             }
-            if (controller.Player2Active)
+            if (controller.Player2Ready)
             {
                 activePlayerCount++;
             }
