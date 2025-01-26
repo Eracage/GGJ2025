@@ -19,7 +19,7 @@ MonoBehaviour:
   Damage: 6
   Speed: 6
   BubbleCreationCooldown: 0.35
-  BubbleEjectionForce: 4
+  BubbleEjectionForce: 5
   BubbleGrowRate: 1.5
   BubbleFillSound: {fileID: 0}
   PlayerDeathSounds:
@@ -41,4 +41,6 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 2994851938359623818, guid: 74a760119e52c364d8defefdf9847b04,
     type: 3}
   BubblePrefab: {fileID: 1973758364946314929, guid: 8b50a63718090634c834f59abd2d60ea,
+    type: 3}
+  BubblePopPrefab: {fileID: 158329305718810037, guid: ec8f4be7625aaed4d8bd7811057fb18f,
     type: 3}

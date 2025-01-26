@@ -19,7 +19,7 @@ public class FadeMusic : MonoBehaviour
     {
         fading = false;
         fadeTimeElapsed = 0f;
-        sourceSlow.volume = 1;
+        sourceSlow.volume = 0.2f;
         sourceFast.volume = 0;
         sourceSlow.Play(0);
         sourceFast.Play(0);
@@ -29,14 +29,14 @@ public class FadeMusic : MonoBehaviour
         if(fading) {
             float lerpValue = fadeTimeElapsed / fadeInSeconds;
             if(speedingUp) {
-                sourceSlow.volume = Mathf.Lerp(1f, 0f, lerpValue);
-                sourceFast.volume = Mathf.Lerp(0f, 1f, lerpValue);
+                sourceSlow.volume = Mathf.Lerp(0.2f, 0f, lerpValue);
+                sourceFast.volume = Mathf.Lerp(0f, 0.2f, lerpValue);
                 if(sourceSlow.volume <= 0f) {
                     fading = false;
                 }
             } else {
-                sourceSlow.volume = Mathf.Lerp(0f, 1f, lerpValue);
-                sourceFast.volume = Mathf.Lerp(1f, 0f, lerpValue);
+                sourceSlow.volume = Mathf.Lerp(0f, 0.2f, lerpValue);
+                sourceFast.volume = Mathf.Lerp(0.2f, 0f, lerpValue);
                 if(sourceSlow.volume >= 1f) {
                     fading = false;
                 }

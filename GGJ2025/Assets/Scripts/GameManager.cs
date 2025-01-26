@@ -23,14 +23,16 @@ public class GameManager : MonoBehaviour
 
     bool tryStartGame = false;
 
-    public float MatchTime = 60;
+    public float MatchTime = 70;
     bool isGameActive = false;
+    bool hasMusicfadeStarted = false;
 
     public float MinTimeInScene = 2;
 
     TextMeshProUGUI GameTimerText;
     TextMeshProUGUI GameOverText;
     GameObject GameOverTitleGrid;
+    FadeMusic musicFader;
 
     public enum GameState
     {
@@ -147,7 +149,7 @@ public class GameManager : MonoBehaviour
     void GameSceneLoaded()
     {
         Players = new List<Player>();
-        MatchTime = 60;
+        MatchTime = 70;
         SetInputToMenuOrGame(true);
         NumberOfConnectedPlayers = 0;
         foreach (var controller in PlayerControllers)
@@ -181,6 +183,7 @@ public class GameManager : MonoBehaviour
 
         GameTimerText = GameObject.FindWithTag("TimerText").GetComponent<TextMeshProUGUI>();
         GameOverText = GameObject.FindWithTag("GameOverText").GetComponent<TextMeshProUGUI>();
+        musicFader = GameObject.FindWithTag("GameMusicController").GetComponent<FadeMusic>();
 
         isGameActive = true;
     }
@@ -195,10 +198,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     void FixedUpdate()
     {
@@ -249,10 +248,32 @@ public class GameManager : MonoBehaviour
     void UpdateGameUI()
     {
         MatchTime -= Time.deltaTime;
+
         if(MatchTime>10.0f)
         {
             int time = (int)MatchTime;
             GameTimerText.text = time.ToString();
+
+            if (MatchTime > 60.0f)
+            {
+                float displaytime = 10.0f - (70.0f - MatchTime);
+                GameTimerText.color = Color.green;
+                GameTimerText.text = "-"+displaytime.ToString("#.#");
+            }
+            else
+            {
+                if(!hasMusicfadeStarted)
+                {
+                    musicFader.StartFade(true);
+                    hasMusicfadeStarted = true;
+                }
+                GameTimerText.color = Color.white;
+                foreach (Player p in Players)
+                {
+                    p.isAttackAllowed = true;
+                }
+            }
+
         }
         else
         {
