@@ -328,6 +328,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: squid
       objectReference: {fileID: 0}
+    - target: {fileID: 8421467600278266206, guid: 4c5f5b796fcc8e6409db38a6057099a4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d57ada00d948994ea5972349c2af929, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c5f5b796fcc8e6409db38a6057099a4, type: 3}
 --- !u!1 &5053293221054640663 stripped
