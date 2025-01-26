@@ -51,12 +51,18 @@ MonoBehaviour:
   - {x: 0, y: 5, z: 0}
   - {x: 0, y: -5, z: 0}
   - {x: 0, y: 0, z: 0}
+  Players: []
   Playerdatas:
   - {fileID: 11400000, guid: 2b6686b682fdcde43944eb7f9b6bea6a, type: 2}
   - {fileID: 11400000, guid: dbfc73db8d571ff4eba9e0d8e08af093, type: 2}
   - {fileID: 11400000, guid: 20e4ada7375100c48b8cbfe6c9fd4330, type: 2}
   - {fileID: 11400000, guid: 76b3400090c429b4bbd35ec2ce2ca89d, type: 2}
   - {fileID: 11400000, guid: 734708eb15c78af4dbba57308d17cc5f, type: 2}
+  deviceDisplayerPrefab: {fileID: 349795292021707088, guid: 1227735651e206b4fb9b659d1ff21a88,
+    type: 3}
+  deviceDisplayGrid: {fileID: 0}
+  MatchTime: 60
+  currentGameState: 0
 --- !u!114 &37392220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 8
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
