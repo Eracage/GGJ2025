@@ -168,6 +168,11 @@ public class GameManager : MonoBehaviour
                 }
                 NumberOfConnectedPlayers++;
             }
+            if (!controller.Player1Active && !controller.Player2Active)
+            {
+                controller.controlledPlayer1 = null;
+                controller.controlledPlayer2 = null;
+            }
         }
 
         GameTimerText = GameObject.FindWithTag("TimerText").GetComponent<TextMeshProUGUI>();
