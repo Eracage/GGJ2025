@@ -32,10 +32,12 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
-        Undefined,
-        PlayerSelect,
-        Game,
-        Highscore
+        Undefined = -1,
+        MainMenu = 0,
+        PlayerSelect = 1,
+        Game = 2,
+        Highscore = 3,
+        Credits = 4
     }
 
     public GameState currentGameState = GameState.Undefined;
@@ -94,7 +96,7 @@ public class GameManager : MonoBehaviour
         }
         tryStartGame = false;
         GetComponent<PlayerInputManager>().DisableJoining();
-        SceneManager.LoadScene(1);
+        LoadSceneTimed(GameState.Game,0);
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -102,16 +104,24 @@ public class GameManager : MonoBehaviour
         switch (scene.buildIndex)
         {
             case 0:
+                // MainMenu
+                break;
+            case 1:
                 currentGameState = GameState.PlayerSelect;
                 PlayerSelectLoaded();
                 break;
-            case 1:
+            case 2:
                 currentGameState = GameState.Game;
                 GameSceneLoaded();
                 break;
-            case 2:
+            case 3:
                 currentGameState = GameState.Highscore;
                 HighscoreSceneLoaded();
+                break;
+            case 4:
+                // Credits
+                break;
+            default:
                 break;
         }
     }
@@ -174,7 +184,7 @@ public class GameManager : MonoBehaviour
             GameObject go = Instantiate(p.data.GameoverSceneName, GameOverTitleGrid.transform);
             go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.score;
         }
-        LoadSceneTimed(0, 10);
+        LoadSceneTimed(GameState.MainMenu, 10);
     }
 
     // Start is called before the first frame update
@@ -230,7 +240,7 @@ public class GameManager : MonoBehaviour
         {
             SetInputToMenuOrGame(false);
 
-            LoadSceneTimed(2, 3.0f);
+            LoadSceneTimed(GameState.Highscore, 3.0f);
         }
     }
 
@@ -254,9 +264,9 @@ public class GameManager : MonoBehaviour
         return bubbles;
     }
 
-    void LoadSceneTimed(int index, float t)
+    void LoadSceneTimed(GameState gameState, float t)
     {
-        StartCoroutine(CoroutineLoadSceneTimed(index, t));
+        StartCoroutine(CoroutineLoadSceneTimed((int)gameState, t));
     }
 
     IEnumerator CoroutineLoadSceneTimed(int index, float t)
