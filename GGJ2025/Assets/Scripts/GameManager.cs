@@ -169,10 +169,10 @@ public class GameManager : MonoBehaviour
     void HighscoreSceneLoaded()
     {
         GameOverTitleGrid = GameObject.FindWithTag("PlayerTitleGrid");
-        foreach (Player p in Players.OrderByDescending(p => p.Bubbles.Count))
+        foreach (Player p in Players.OrderByDescending(p => p.score))
         {
             GameObject go = Instantiate(p.data.GameoverSceneName, GameOverTitleGrid.transform);
-            go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.Bubbles.Count;
+            go.GetComponent<TextMeshProUGUI>().text += "  -  " + p.score;
         }
         LoadSceneTimed(0, 10);
     }
