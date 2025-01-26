@@ -990,7 +990,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BUBBLE SQUID WITCH GAME SAGA
+  m_text: HATE TO BREAK YOUR BUBBLE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a64033638fd1824e8016437285159fd, type: 2}
   m_sharedMaterial: {fileID: 7629745649996632919, guid: 9a64033638fd1824e8016437285159fd,
