@@ -86,13 +86,16 @@ public class Player : MonoBehaviour
 
     void RotateModel()
     {
-        if(!isAttacking && PlayerMovement.magnitude>0)
+        if(!isAttacking && PlayerMovementInput.magnitude>0)
         {
-
             modelHolder.transform.rotation = Quaternion.Slerp(modelHolder.transform.rotation, Quaternion.LookRotation(new Vector3(PlayerMovement.x,PlayerMovement.y,0.0f)), Time.deltaTime * 10f);
         }else
         {
             modelHolder.transform.rotation = Quaternion.Slerp(modelHolder.rotation, Quaternion.LookRotation(Vector3.up), Time.deltaTime * 10f);
+        }
+        if(!isAttacking && PlayerMovementInput.magnitude <= 0)
+        {
+            modelHolder.transform.rotation = Quaternion.Slerp(modelHolder.transform.rotation, Quaternion.LookRotation(Vector3.right), Time.deltaTime * 10f);
         }
     }
 
@@ -122,7 +125,7 @@ public class Player : MonoBehaviour
 
     void GrowBubble()
     {
-        audioSource.pitch += Time.deltaTime;
+        //audioSource.pitch += Time.deltaTime;
         bubble.transform.localScale += bubble.transform.localScale * data.BubbleGrowRate * Time.deltaTime;
         bubble.transform.position =  BubbleSpawnPosition.position + BubbleSpawnPosition.forward * bubble.transform.localScale.x;
         if (bubble.transform.localScale.x > 3)
@@ -138,9 +141,9 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        audioSource.loop = false;
-        audioSource.pitch = 1.0f;
-        audioSource.Stop();
+        //audioSource.loop = false;
+        //audioSource.pitch = 1.0f;
+        //audioSource.Stop();
         bubble.transform.parent = null;
         bubble.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(BubbleSpawnPosition.forward) * data.BubbleEjectionForce, ForceMode.Impulse);
         Bubble BubbleComponent = bubble.AddComponent<Bubble>();
@@ -160,7 +163,8 @@ public class Player : MonoBehaviour
 
         isAttacking = true;
         audioSource.loop = true;
-        audioSource.PlayOneShot(data.PlayerAttackSounds[Random.Range(0, data.PlayerAttackSounds.Length)]);
+        audioSource.clip = data.PlayerAttackSounds[0];
+        audioSource.Play();
        //Animation loop
     }
 
