@@ -15,7 +15,7 @@ MonoBehaviour:
   index: 1
   Score: 0
   Name: Red
-  AttackRange: 0.8
+  AttackRange: 1
   Damage: 6
   Speed: 6
   BubbleCreationCooldown: 0.5
