@@ -57,6 +57,26 @@ public class Player : MonoBehaviour
         Vector3 movement = new Vector3(PlayerMovement.x, PlayerMovement.y, 0) * data.Speed * Time.fixedDeltaTime;
         transform.Translate(movement);
 
+        Vector3 positionChange = Vector3.zero;
+        if (transform.position.x < -30)
+        {
+            positionChange.x += 60;
+        }
+        if (transform.position.x > 30)
+        {
+            positionChange.x -= 60;
+        }
+        if (transform.position.y < -15)
+        {
+            positionChange.y += 32;
+        }
+        if (transform.position.y > 17)
+        {
+            positionChange.y -= 32;
+        }
+        transform.Translate(positionChange);
+
+
         UpdateScore();
 
         if (isAttacking)
