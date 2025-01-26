@@ -143,39 +143,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "116ec923-cb9e-4b24-9d35-99a933503456",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Action1",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "ecd5a0e9-352b-4d37-a06d-a20161eb8143",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Action1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "78784040-109c-44bf-b22b-2eefae8adb17",
-                    "path": "<HID::HP, Inc 0>/button2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Action1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "WASD",
                     "id": "c6dca40e-17d1-4536-aaa0-7e088d0c3837",
                     "path": "2DVector",
@@ -248,17 +215,6 @@
                     "interactions": "",
                     "processors": "NormalizeVector2",
                     "groups": "Mouse",
-                    "action": "Movement1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4b0432c6-b0d4-4743-b3cc-1076b363cf23",
-                    "path": "<Joystick>/stick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
                     "action": "Movement1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -572,39 +528,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "b2717b6a-e3b1-44ca-8e39-0fe0e5eee279",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Action1",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "84dbb5ed-61c2-4e2e-bc23-2d2f2f22df7c",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Action1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "d6a9c2ec-f18e-400e-ae6f-d3f775a0d2ad",
-                    "path": "<HID::HP, Inc 0>/button2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Action1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "WASD",
                     "id": "a0189364-8657-4fdf-a565-7e812ab10e65",
                     "path": "2DVector",
@@ -677,17 +600,6 @@
                     "interactions": "",
                     "processors": "NormalizeVector2",
                     "groups": "Mouse",
-                    "action": "Movement1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2fb170c6-b1bf-4e7a-bbee-4c335da943d6",
-                    "path": "<Joystick>/stick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
                     "action": "Movement1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -889,17 +801,6 @@
             "devices": [
                 {
                     "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Joystick",
-            "bindingGroup": "Joystick",
-            "devices": [
-                {
-                    "devicePath": "<Joystick>",
                     "isOptional": false,
                     "isOR": false
                 }
